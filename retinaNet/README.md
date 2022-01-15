@@ -1,9 +1,13 @@
 # RetinaNet
----
+
 "Focal Loss for Dense Object Detection" 논문 기반으로 공부 + 블로그 참고. <br>
-기존의 one-stage detection의 foreground와 background의 class imbalance문제의 해결책 제시.
+기존의 one-stage detection의 foreground와 background의 class imbalance문제의 해결책 제시. <br>
+음.. 사실상 focal loss빼고는 기존에 있던 내용 느낌... 
+###### ( 기존 내용도 차근차근 올릴 예정...ㅎ )
 
 <br>
+
+---
 
 ### foreground, background class imbalance
 여러개의 anchor중에서 object를 포함하고 있는 anchor ( = foreground) 개수보다 배경을 담고 있는 anchor ( = background) 의 수가 훨씬 더 많음. 
@@ -29,6 +33,8 @@
     
 <br>
 
+---
+
 ### Focal Loss
 덜 분류된 것들에게는 많은 loss를 주고 잘 분류된 것들에게는 적은 loss를 주는 것이 주된 idea
 
@@ -46,4 +52,20 @@
 
 <img width="300" src="https://user-images.githubusercontent.com/55525705/149625789-58186aa4-f8ec-46c8-8ab5-817bc65db211.png">
 
+#### - Initialization
+Focal Loss를 사용할 때는 초기화 작업이 중요하다고 함. <br>
+그런데 이 초기화 작업이 기존의 binary classification 과는 조금 다름. <br>
+ - 기존 : 보통 initialization을 할 때 두 label의 확률을 0.5로 같게 초기화 함
+ - focal loss : rare class 인 것처럼 초기화
+
+__why?__ 기존의 label의 확률을 0.5, 0.5로 만들어주면 class imbalance로 인해서 우세한 class가 생겨버리게 됨. 이때, rare class인 것처럼 초기화를 0.01로 작은 값으로 해주게 되면 class imbalance로 인해 생기는 초기화 문제를 피할 수 있음.
+<br>
+__how?__ sigmod이후 값을 0.01로 고정시키고 확인
+
+<img width="300" src="https://user-images.githubusercontent.com/55525705/149626879-f0e8dd32-c7b9-499c-b04d-c78348f9db9c.png">
+
+위 그림과 같은 과정을 통해서 bias초기화 가능하고 wieght 는 N(0, 0.01) 에서 sampling 을 하여 초기화를 진행. <br>
+convolution weight 가 0 에 가깝고 bias 가 위에서 초기화한 식의 값이 되므로, bias 만 남게되어 초기의 sigmoid 이후의 값을 (0.01) 로 제한 가능
+
+ ###### 요 부분은 더 공부가 필요! :sob:
 

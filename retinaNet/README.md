@@ -2,7 +2,7 @@
 
 "Focal Loss for Dense Object Detection" 논문 기반으로 공부 + 블로그 참고. <br>
 기존의 one-stage detection의 foreground와 background의 class imbalance문제의 해결책 제시. <br>
-음.. 사실상 focal loss빼고는 기존에 있던 내용 느낌... 
+retinaNet은 기존의 model들을 backbone으로 focal loss를 적용한 형태이기에 focal loss를 중점으로 공부. <br>
 ###### ( 기존 내용도 차근차근 올릴 예정...ㅎ )
 
 <br>

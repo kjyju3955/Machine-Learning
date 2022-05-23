@@ -25,7 +25,6 @@ retinaNet은 기존의 model들을 backbone으로 focal loss를 적용한 형태
 <br>
 
 #### - 위의 문제를 해결하는 방법
-- YOLOv2 : object인지 배경인지 판단하는 기준을 conf term과 class score의 conditional probability로 정의하여 그 둘의 곱으로 두어서 학습
 - SSD : hard negative minig 방식 사용
 - ***RetinaNet : Focal Loss 사용*** 
 
